@@ -3,6 +3,15 @@ import { db } from "../config/db.js";
 
 export const postRouter = express()
 
+postRouter.get("/post", async (req, res)=>{
+    try {
+        const[results] = await db.query("SELECT post.titulo, post.autor, post.genero, post.paginas, post.nota, post.tempo, post.resenha, post.id_user, (SELECT count(*) FROM recomendar WHERE post.id_post =  recomendar.id_post) AS likes, (SELECT count(*) FROM `comment` WHERE post.id_post =  comment.id_post) AS resenhas FROM post")
+        res.send(results)
+    } catch (error) {
+            console.log(error);
+    }
+})
+
 postRouter.post("/post", async (req, res)=>{
         try {
             const {body} = req
@@ -12,14 +21,4 @@ postRouter.post("/post", async (req, res)=>{
             console.log(error);
             
         }
-})
-
-postRouter.get("/post/:id", async (req, res)=>{
-    try {
-        const {id} = req.params
-        const[results] = await db.query("SELECT * FROM post WHERE id_user = ?", id)
-    } catch (error) {
-            console.log(error);
-            
-    }
 })

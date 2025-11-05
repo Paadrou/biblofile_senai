@@ -11,7 +11,7 @@ userRouter.get("/user", async (req, res) => {
 userRouter.get("/user/:id", async (req, res)=>{
     try {
         const { id } = req.params;
-        const [results] = await db.query("SELECT user.nome, user.senha, user.email, user.idade, (SELECT COUNT(post.id_user),  FROM biblofile_db.post WHERE biblofile_db.post.id_user = user.id_user) AS qtd_livros, (SELECT AVG(post.nota), FROM biblofile_db.post WHERE biblofile_db.post.id_user = user.id_user) AS media FROM user  WHERE id_user=?", id)
+        const [results] = await db.query("SELECT user.nome, user.senha, user.email, user.idade, (SELECT COUNT(post.id_user)  FROM biblofile_db.post WHERE biblofile_db.post.id_user = user.id_user) AS qtd_livros, (SELECT AVG(post.nota) FROM biblofile_db.post WHERE biblofile_db.post.id_user = user.id_user) AS media FROM user  WHERE id_user=?", id)
         res.send(results)
     } catch (error) {
         console.log(error);
