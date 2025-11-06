@@ -1,0 +1,27 @@
+.metrica{
+    margin: 10px 10px 50px 10px;
+    padding: 5px;
+    background-color: #0077ff23;
+    border-radius: 5px;
+    border: 1px #00000080 solid;
+}
+
+.userCard{
+    height: auto;
+    border-radius: 5px;
+    border: 1px #00000080 solid;
+}
+
+.topoCard{
+    margin-bottom: 50000px;
+}
+
+.bg{
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #3c91ff2c;
+}
+
+.card{
+    width: 250px;
+}
